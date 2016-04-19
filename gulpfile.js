@@ -12,7 +12,7 @@ var gulp       = require('gulp'),
     csso       = require('gulp-csso'),
     jade       = require('gulp-jade'),
     assets     = require('gulp-bower-assets'),
-    runseq     = require('gulp-run-sequence')
+    runseq     = require('run-sequence')
     //bower      = require('main-bower-files')
     //bowerSrc   = require('gulp-bower-src')
     
@@ -23,10 +23,12 @@ var config = {
 gulp.task('bower-bundle', function() {
   gulp.src('./assets.json')
     .pipe(assets(config))
-    .pipe(gulp.dest('assets'))
+    .pipe(gulp.dest('assets'));
+  
 });
 
-gulp.task('bower-minify-css', ['bower-bundle'], function() {
+gulp.task('bower-minify-css', function() {
+    setTimeout(function(){}, 2000)
     gulp.src('assets/all.css')
       .pipe(plumber())
       .pipe(sourcemaps.init())
@@ -36,7 +38,8 @@ gulp.task('bower-minify-css', ['bower-bundle'], function() {
       .pipe(gulp.dest('assets'))
 });
 
-gulp.task('bower-minify-js', ['bower-bundle'], function() {
+gulp.task('bower-minify-js', function() {
+    setTimeout(function(){}, 2000)
     gulp.src('assets/all.js')
       .pipe(plumber())
       .pipe(sourcemaps.init())
@@ -96,8 +99,12 @@ gulp.task('watch', function() {
   gulp.watch('bower_components/**', ['bower']);
 });
 
-gulp.task('bower', function(cb) {
-  runseq('bower-bundle', 'bower-minify-css', 'bower-minify-js', cb);
+gulp.task('bower', function(callback) {
+  runseq('bower-bundle', 
+  ['bower-minify-css', 'bower-minify-js'], callback);
+  setTimeout(function(){
+    runseq('bower-minify-css', 'bower-minify-js')
+  }, 2000)
 });
 
 gulp.task('build', [
