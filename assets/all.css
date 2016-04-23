@@ -1,8 +1,1 @@
-/* line 1, ../src/sass/all.sass */
-#app {
-  background: black;
-}
-/* line 4, ../src/sass/all.sass */
-#app h1 {
-  color: green;
-}
+#app{background:#000}#app h1{color:green}

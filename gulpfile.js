@@ -22,8 +22,8 @@ webpackSrc = [
 ]
 
 compassSrc = [
-  './src/sass/all.sass',
-  './src/sass/screen.scss'
+  'src/sass/all.sass',
+  'src/sass/screen.scss'
 ]
 
 gulp.task('server', () => {
@@ -73,7 +73,9 @@ gulp.task('compass', () => {
       .pipe(plumber())
       .pipe(sourcemaps.init())
         .pipe(compass({
-          config_file: './src/config.rb'
+          config_file: './src/config.rb',
+          sass: './src/sass',
+          css: './assets'
         })).on('error', (err) => {
           console.log(err)
           //this.emit('end')
