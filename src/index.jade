@@ -3,17 +3,18 @@ doctype html
 html(lang="ru")
   head
     title yogurt1
-    link(href="assets/all.min.css", rel="stylesheet")
-    link(href="assets/styles.css", rel="stylesheet")
+    //link(href="assets/all.min.css", rel="stylesheet")
+    link(href="assets/all.css", rel="stylesheet")
     
     meta(charset="UTF-8")
     meta(name="viewport",content="width=device-width, initial-scale=1")
   
   body
-
-    //+topmenu()
-    h1 Test
-    h2 Example
-    script(src="assets/all.min.js")
+    //+topbar()
+    nav.nav-pills: ul
+      each n in [1, 2, 3]
+        li: a(href=i) link#{i}
+    .container-fluid(style="padding-top: 20px;"): #app
+    //script(src="assets/all.min.js")
     script(src="assets/bundle.js")
     

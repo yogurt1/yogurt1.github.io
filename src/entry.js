@@ -1,5 +1,10 @@
-//require('librequire');
-require('jquery');
-//require('bootstrap');
-//require('font-awesome');
+require('./jsx/main.cjsx')
 
+/*import { has } from 'lodash/core'
+let o = {
+  foo: 'bar'
+}
+
+console.log(
+  has ( o, 'bar')
+)*/

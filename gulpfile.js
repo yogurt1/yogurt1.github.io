@@ -1,123 +1,101 @@
-var gulp       = require('gulp'),
-    uglify     = require('gulp-uglify'),
-    filter     = require('gulp-filter'),
-    concat     = require('gulp-concat'),
-    rename     = require('gulp-rename'),
-    connect    = require('gulp-connect'),
-    stylus     = require('gulp-stylus'),
-    coffee     = require('gulp-coffee'),
-    plumber    = require('gulp-plumber'),
-    sourcemaps = require('gulp-sourcemaps'),
-    watch      = require('gulp-watch'),
-    csso       = require('gulp-csso'),
-    jade       = require('gulp-jade'),
-    assets     = require('gulp-bower-assets'),
-    runseq     = require('run-sequence')
-    //bower      = require('main-bower-files')
-    //bowerSrc   = require('gulp-bower-src')
-    
-var config = {
-  prefix: false
-}
+var gulp = require('gulp')
+var uglify = require('gulp-uglify')
+var concat = require('gulp-concat')
+var rename = require('gulp-rename')
+var watch = require('gulp-watch')
+var connect = require('gulp-connect')
+var webpack = require('webpack-stream')
+var plumber = require('gulp-plumber')
+var sourcemaps = require('gulp-sourcemaps')
+var coffee = require('gulp-coffee')
+var jade = require('gulp-jade')
+var compass = require('gulp-compass')
+var csso = require('gulp-csso')
+var path = require('path')
 
-gulp.task('bower-bundle', function() {
-  gulp.src('./assets.json')
-    .pipe(assets(config))
-    .pipe(gulp.dest('assets'));
-  
-});
+webpackSrc = [
+  './src/entry.js',
+  './src/jsx/*.jsx',
+  './src/jsx/*.cjsx',
+  './src/lib/*.js',
+  './webpack.config.js'
+]
 
-gulp.task('bower-minify-css', function() {
-    setTimeout(function(){}, 2000)
-    gulp.src('assets/all.css')
-      .pipe(plumber())
-      .pipe(sourcemaps.init())
-        .pipe(csso())
-        .pipe(rename({suffix: '.min'}))
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest('assets'))
-});
+compassSrc = [
+  './src/sass/all.sass',
+  './src/sass/screen.scss'
+]
 
-gulp.task('bower-minify-js', function() {
-    setTimeout(function(){}, 2000)
-    gulp.src('assets/all.js')
-      .pipe(plumber())
-      .pipe(sourcemaps.init())
-        .pipe(uglify())
-        .pipe(rename({suffix: '.min'}))
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest('assets'))
-});
+gulp.task('server', () => {
+  connect.server({
+    livereload: true,
+    port: 1337
+  })
+})
 
-
-gulp.task('server', function() {
-    connect.server({
-      livereload: true,
-      listen: 8090
-    });
-});
-
-gulp.task('jade', function() {
-    gulp.src('src/index.jade')
-      .pipe(plumber())
-      .pipe(jade())
-      .pipe(gulp.dest('.'))
-});
-
-gulp.task('coffee', function() {
-    gulp.src('src/*.coffee')
-        .pipe(plumber())
-        .pipe(coffee({bare:true}))
-        .pipe(sourcemaps.init())
-          .pipe(concat('bundle.js'))
-          .pipe(uglify())
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('assets'))
-});
-
-gulp.task('stylus', function() {
-    gulp.src('src/*.stylus')
-        .pipe(stylus())
-        .pipe(sourcemaps.init())
-          .pipe(concat('styles.css'))
-          .pipe(csso())
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('assets'))
-});
-
-gulp.task('livereload', function() {
-  gulp.src(['assets/*.css', 'assets/*.js', './index.html'])
+gulp.task('cooffee', () => {
+  gulp.src('src/scripts/*.coffee')
     .pipe(plumber())
-    .pipe(watch(['assets/*.css', 'assets/*.js', './index.html']))
+    .pipe(sourcemaps.init)
+      .pipe(coffee({
+        bare: true
+      }))
+      .pipe(concat('app.js'))
+      .pipe(rename({
+        suffix: '.min'
+      }))
+      .pipe(uglify)
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('assets'))
     .pipe(connect.reload())
+})
+
+gulp.task('jade', () => {
+  gulp.src('src/index.jade')
+    .pipe(plumber())
+    .pipe(jade())
+    .pipe(gulp.dest('.'))
+    .pipe(connect.reload())
+})
+
+gulp.task('webpack', () => {
+  gulp.src('src/entry.js')
+    .pipe(plumber())
+    .pipe(webpack(
+      require('./webpack.config.js')
+    ))
+    .pipe(gulp.dest('assets'))
+    .pipe(connect.reload())
+})
+
+gulp.task('compass', () => {
+    gulp.src(compassSrc)
+      .pipe(plumber())
+      .pipe(sourcemaps.init())
+        .pipe(compass({
+          config_file: './src/config.rb'
+        })).on('error', (err) => {
+          console.log(err)
+          //this.emit('end')
+        })
+        .pipe(csso())
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest('assets'))
+    
 });
 
-gulp.task('watch', function() {
-  gulp.watch('src/*.stylus', ['stylus']);
-  gulp.watch('src/*.coffee', ['coffee']);
-  gulp.watch('src/index.jade', ['jade']);
-  gulp.watch('bower_components/**', ['bower']);
-});
-
-gulp.task('bower', function(callback) {
-  runseq('bower-bundle', 
-  ['bower-minify-css', 'bower-minify-js'], callback);
-  setTimeout(function(){
-    runseq('bower-minify-css', 'bower-minify-js')
-  }, 2000)
-});
+gulp.task('watch', () => {
+  gulp.watch('src/index.jade', ['jade'])
+  gulp.watch(webpackSrc, ['webpack'])
+  gulp.watch(['src/sass/*'], ['compass'])
+  //gulp.watch('./gulpfile.js', )
+})
 
 gulp.task('build', [
-  'coffee',
-  'stylus',
-  'jade',
-  'bower'
-  //'svgmin',
-]);
+  'jade', 'compass', 
+  'webpack' 
+])
 
 gulp.task('default', [
-  'build',
-  'server',
-  'livereload',
-  'watch'
-]);
+  'build', 'server', 'watch'
+])
