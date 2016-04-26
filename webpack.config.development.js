@@ -6,7 +6,7 @@ var path = require('path')
 module.exports = {
   //context: path.join(__dirname, 'src'),
   entry: "./src/entry",
-  devtool: 'source-map',
+  devtool: 'eval',
   output: {
     path: path.join(__dirname, 'assets'),
     filename: "bundle.js",
@@ -54,23 +54,10 @@ module.exports = {
 
     new AppCachePlugin,
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        properties: true,
-        dead_code: true
-      },
-      output: {
-        comments: false
-      },
-      minimize: true,
-      ie_proof: false
-      //sourceMap: true
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         //'NODE_ENV': JSON.stringify((process.env.NODE_ENV == 'production') ? 'production' : 'development')
-        'NODE_ENV': JSON.stringify('production')
+        'NODE_ENV': JSON.stringify('development')
       }
     }),
     new webpack.optimize.AggressiveMergingPlugin()

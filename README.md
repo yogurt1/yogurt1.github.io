@@ -1,2 +1,10 @@
 # yogurt1.github.io
-My portfolio
+## My portfolio
+
+Code:
+```coffee
+  #!/bin/bash
+  echo "Lol"
+```
+
+* *.litcoffee - CoffeeScript code with Markdown

@@ -1,7 +1,8 @@
 CACHE MANIFEST
-# 3d966a90b8fc366d30a4
+# b6d4cd837f7511d01b22
 
 bundle.js
+bundle.js.map
 
 NETWORK:
 *

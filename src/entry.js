@@ -1,10 +1,13 @@
-require('./jsx/main.cjsx')
+// React
+// import React from 'react'
+// import { render } from 'react-dom'
 
-/*import { has } from 'lodash/core'
-let o = {
-  foo: 'bar'
-}
+// App
+require('./app')
 
-console.log(
-  has ( o, 'bar')
-)*/
+// Libs
+import _ from 'lodash/core'
+import $ from 'jquery'
+
+// Frameworks
+import backbone from 'backbone'

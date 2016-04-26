@@ -15,15 +15,15 @@ var path = require('path')
 
 webpackSrc = [
   './src/entry.js',
-  './src/jsx/*.jsx',
-  './src/jsx/*.cjsx',
-  './src/lib/*.js',
+  './src/app.jsx',
+  './src/components/*',
   './webpack.config.js'
 ]
 
 compassSrc = [
   'src/sass/all.sass',
-  'src/sass/screen.scss'
+  //'src/sass/screen.scss',
+  'src/sass/print.sass'
 ]
 
 gulp.task('server', () => {
@@ -62,6 +62,8 @@ gulp.task('webpack', () => {
   gulp.src('src/entry.js')
     .pipe(plumber())
     .pipe(webpack(
+      ( process.env.NODE_ENV == 'development' ) ?
+      require('./webpack.config..development.js') :
       require('./webpack.config.js')
     ))
     .pipe(gulp.dest('assets'))
