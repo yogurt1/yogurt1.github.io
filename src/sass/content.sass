@@ -1,0 +1,42 @@
+.content
+  //background: url('/assets/background.jpg')
+  //background: #eee
+  //position: absolute
+  display: flex
+  box-flex: 1
+  flex: 1
+  color: black
+  //overflow: visible
+  z-index: 2
+  transform: translateX(0)
+  transition: transform .3s
+  &.open
+    transform: translateX(200px)
+
+.page-wrap
+  margin: 0 auto
+  padding: 40px 40px 40px
+  width: 1100px
+  background: #fff
+  color: #333
+  font: 14pt $sans
+  
+.navigation-wrap
+  height: 70px
+  position: fixed
+  bottom: 0
+  z-index: 9000
+  bottom: 0
+  background: #fff
+  flex: 1
+  float: center
+  margin: 0 auto
+  font: 13pt $sans
+  box-shadow: 10px 10px 10px 0 rgba(0,0,0,.75)
+//.navigation
+//  font: 13pt $sans
+//  margin: 0 auto
+//  color: #333
+//  background: #eee
+//  & a
+//    padding: 2px 2px

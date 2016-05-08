@@ -1,21 +1,29 @@
-//include mixins.jade
+include mixins.jade
 doctype html
 html(lang="ru")
   head
     title yogurt1
     //link(href="assets/common.css", rel="stylesheet")
-    link(href="assets/all.css", rel="stylesheet")
+    link(href="assets/common.css", rel="stylesheet")
+    link(href="assets/style.css", rel="stylesheet")
     link(href="assets/print.css", rel="stylesheet", media="print")
-    
     meta(charset="UTF-8")
-    meta(name="viewport",content="width=device-width, initial-scale=1")
-  
+    meta(name="viewport",content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1")
+    meta(name="author", content="yogurt1")
+    meta(name="keywords", content="yogurt1, github, frontpage")
+    meta(name="description", content="fronpage")
+    meta(http-equiv="Content-Type", content="text/html")
+    meta(name="theme-color", content="#000")
+
   body
-    //+topbar()
-    nav.nav-pills: ul
-      each n in [1, 2, 3]
-        li: a(href=i) link#{i}
-    .container-fluid(style="padding-top: 20px;"): #app
-    //script(src="assets/all.min.js")
-    script(src="assets/bundle.js", async, defer)
-   
+    .body-wrap
+      .sidebar: include templates/sidebar.jade
+      .content: include templates/content.jade
+      .navigation-wrap: .navigation
+        each i in [1,2,3,4]
+          a Number #{i}
+      a#push-sidebar
+      a#scroll-to-top
+    script(src="assets/bundle.js", defer)
+    script(src="assets/scripts.js", defer)
+

@@ -1,53 +1,67 @@
-var gulp = require('gulp')
-var uglify = require('gulp-uglify')
-var concat = require('gulp-concat')
-var rename = require('gulp-rename')
-var watch = require('gulp-watch')
-var connect = require('gulp-connect')
-var webpack = require('webpack-stream')
-var plumber = require('gulp-plumber')
-var sourcemaps = require('gulp-sourcemaps')
-var coffee = require('gulp-coffee')
-var jade = require('gulp-jade')
-var compass = require('gulp-compass')
-var csso = require('gulp-csso')
-var path = require('path')
+var gulp = require('gulp'),
+  uglify = require('gulp-uglify'),
+  concat = require('gulp-concat'),
+  watch = require('gulp-watch'),
+  plumber = require('gulp-plumber'),
+  sourcemaps = require('gulp-sourcemaps'),
+  coffee = require('gulp-coffee'),
+  jade = require('gulp-jade'),
+  csso = require('gulp-csso'),
+  path = require('path'),
+  uncss = require('gulp-uncss'),
+  sass = require('gulp-sass'),
+  streamify = require('gulp-streamify'),
+  browserify = require('browserify'),
+  autoprefixer = require('gulp-autoprefixer'),
+  gulpif = require('gulp-if'),
+  source = require('vinyl-source-stream'),
+  browserSync = require('browser-sync').create()
 
-webpackSrc = [
-  './src/entry.js',
-  './src/app.jsx',
-  './src/components/*',
-  './webpack.config.js'
+jadeSrc = [
+  'src/templates/*.jade',
+  'src/mixins.jade',
+  'src/index.jade'
 ]
 
-compassSrc = [
-  'src/sass/all.sass',
-  //'src/sass/screen.scss',
-  'src/sass/print.sass'
+bowerSrc = [
+  'src/assets.json',
+  'src/components/*'
 ]
 
-gulp.task('server', () => {
-  connect.server({
-    livereload: true,
-    port: 1337
+sassSrc = [
+  'src/sass/style.sass',
+  'src/sass/print.sass',
+  'src/sass/common.sass'
+]
+
+isProduction = ( process.env.NODE_ENV =="production" || false )
+
+coffeeSrc = [
+  'src/scripts/*.coffee'
+]
+
+gulp.task('serve', ['jade', 'coffee', 'sass', 'browserify'], () => {
+  browserSync.init({
+    server: {
+      baseDir: './'
+    }
   })
+
+  gulp.watch('./assets/*').on('change', browserSync.reload)
 })
 
-gulp.task('cooffee', () => {
-  gulp.src('src/scripts/*.coffee')
+gulp.task('coffee', () => {
+  gulp.src(coffeeSrc)
     .pipe(plumber())
-    .pipe(sourcemaps.init)
+    .pipe(concat('scripts.js'))
+    //.pipe(sourcemaps.init)
       .pipe(coffee({
-        bare: true
+        bare: !isProduction
       }))
-      .pipe(concat('app.js'))
-      .pipe(rename({
-        suffix: '.min'
-      }))
-      .pipe(uglify)
-    .pipe(sourcemaps.write('.'))
+      .pipe(gulpif(isProduction, uglify()))
+    //.pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('assets'))
-    .pipe(connect.reload())
+    .pipe(browserSync.stream())
 })
 
 gulp.task('jade', () => {
@@ -55,51 +69,59 @@ gulp.task('jade', () => {
     .pipe(plumber())
     .pipe(jade())
     .pipe(gulp.dest('.'))
-    .pipe(connect.reload())
+    .pipe(browserSync.stream())
 })
 
-gulp.task('webpack', () => {
-  gulp.src('src/entry.js')
-    .pipe(plumber())
-    .pipe(webpack(
-      ( process.env.NODE_ENV == 'development' ) ?
-      require('./webpack.config..development.js') :
-      require('./webpack.config.js')
-    ))
-    .pipe(gulp.dest('assets'))
-    .pipe(connect.reload())
-})
-
-gulp.task('compass', () => {
-    gulp.src(compassSrc)
+gulp.task('sass', () => {
+    gulp.src(sassSrc)
       .pipe(plumber())
+      .pipe(sass({
+        loadPath: 'src/components'
+      }))
+/*      .pipe(uncss({
+           html: ['index.html']
+      }))*/
       .pipe(sourcemaps.init())
-        .pipe(compass({
-          config_file: './src/config.rb',
-          sass: './src/sass',
-          css: './assets'
-        })).on('error', (err) => {
-          console.log(err)
-          //this.emit('end')
-        })
-        .pipe(csso())
+        .pipe(autoprefixer({
+          browsers: ['last 2 version'],
+          cascade: false
+        }))
+        .pipe(gulpif(isProduction, csso()))
       .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('assets'))
-    
-});
+      .pipe(browserSync.stream())
+})
+
+gulp.task('browserify', () => {
+  browserify('src/entry.js')
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(streamify(uglify({
+      mangle: true,
+      compress: {
+        dead_code: true,
+        unsafe: true
+      }
+    })))
+    .pipe(gulp.dest('assets'))
+})
 
 gulp.task('watch', () => {
-  gulp.watch('src/index.jade', ['jade'])
-  gulp.watch(webpackSrc, ['webpack'])
-  gulp.watch(['src/sass/*'], ['compass'])
-  //gulp.watch('./gulpfile.js', )
+  gulp.watch(jadeSrc, ['jade'])
+  gulp.watch(['src/scripts/*'], ['coffee'])
+  gulp.watch(['src/sass/*'], ['sass'])
+  gulp.watch('src/entry.js', ['browserify'])
 })
 
 gulp.task('build', [
-  'jade', 'compass', 
-  'webpack' 
+  'browserify',
+  'coffee',
+  'sass',
+  'jade',
 ])
 
 gulp.task('default', [
-  'build', 'server', 'watch'
+  'build',
+  'serve',
+  'watch'
 ])

@@ -1,0 +1,49 @@
+// @import "../components/susy/sass/susy"
+// @import "bower_components/susy/sass"
+
+$sans: "PT Sans", Helvetica, Arial, sans-serif
+$serif: "PT Serif", Times, "Times New Roman", serif
+$code: Iosevka, Monaco, Courier, "Courier New"
+
+$layout: 12 .25 show
+
+*
+  margin: 0
+  padding: 0
+  &, &:before, &:after
+    box-sizing: border-box
+
+html, body
+  height: 100%
+
+html
+  padding: 5px 5px 5px
+  font-family: $sans
+
+body
+  overflow-x: hidden
+  background: #eee
+  background: url('/assets/background.jpg')
+
+
+.body-wrap
+  padding-top: 0.7em
+  font-size: 11pt
+  display: flex
+  min-height: 100%
+  background: none
+
+.hidden
+  display: none
+
+.links > a
+  padding-left: 3px
+  padding-right: 3px
+  &:first-child
+    padding-left: 0
+  &:last-child
+    padding-right: 0
+
+@import "sidebar"
+@import "content"
+@import "icons"

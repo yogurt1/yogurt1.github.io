@@ -1,0 +1,24 @@
+.sidebar
+  position: fixed
+  background: #fff
+  height: 100%
+  //box-shadow: 3px 0 6px 0
+  flex: 1
+  width: 300px
+  left: -300px
+  top: 0
+  padding-top: 15px
+  padding-left: 20px
+  overflow: hidden
+  //visibility: hidden
+  z-index: 1
+  transition: left .3s, box-shadow .5s
+  &.open
+    box-shadow: 25px 25px 50px 0px rgba(0,0,0,0.75);
+    left: 0
+  /*@media (max-width: 540px)
+    padding-top: 15px*/
+
+.links
+  position: fixed
+  top: 93%

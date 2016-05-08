@@ -1,13 +1,4 @@
-// React
-// import React from 'react'
-// import { render } from 'react-dom'
+//require('./components/prismjs/prism.js')
+const Hammer = require('./components/hammerjs/hammer.js')
 
-// App
-require('./app')
 
-// Libs
-import _ from 'lodash/core'
-import $ from 'jquery'
-
-// Frameworks
-import backbone from 'backbone'

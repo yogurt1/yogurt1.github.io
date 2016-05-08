@@ -1,0 +1,70 @@
+// Actions
+#push-sidebar
+  position: fixed
+  top: 15px
+  //left: 155px
+  left: 10px
+  overflow: hidden
+  cursor: pointer
+  z-index: 9000
+  color: white
+  font: 30px fontawesome
+  transition: transform .3s, left .1s, color .05s linear
+  &:before
+    content: '\f0c9'
+  &.open
+    transform: rotate(90deg)
+    left: 255px
+    &:before
+      content: '\f00d'
+    color: #000
+
+// Social
+#github,
+#instagram,
+#email,
+#twitter,
+#pocket,
+#slack,
+#star
+  font: 25px fontawesome
+  color: black
+  padding-left: 7px
+  padding-right: 7px
+  text-decoration: none
+  transition: text-shadow .3s
+  &:hover
+    //background: rgba(0,0,0,.1)
+    text-shadow: 1px 1px 2px #666
+  &:first-child
+    padding-left: 0
+  &:last-child
+    padding-right: 0
+
+#github:before
+  content: 'GitHub'
+  content: '\f09b'
+
+#instagram:before
+  content: 'Instagram'
+  content: '\f16d'
+
+#email:before
+  content: 'E-mail'
+  content: '\f0e0'
+  
+#twitter:before
+  content: 'Twitter'
+  content: '\f099'
+  
+#pocket
+  content: 'Pocket'
+  content: '\f265'
+  
+#slack
+  content: 'Slack'
+  content: '\f198'
+  
+#star
+  content: 'Star'
+  content: '\2605'

@@ -38,5 +38,8 @@ bower_components
 #SASS/Compass
 .sass-cache
 
+#tmp
+tmp
+
 #Gemfile lock
 #Gemfile.lock

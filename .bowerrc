@@ -1,5 +1,6 @@
 {
   "ignoredDependencies": [
     "jquery"
-  ]
+  ],
+  "directory": "src/components"
 }

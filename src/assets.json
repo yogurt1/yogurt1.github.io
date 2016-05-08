@@ -1,0 +1,15 @@
+{
+  "assets": {
+    "../assets/main.css@concat": [
+      "font-awesome/css/font-awesome.min.css",
+      "animate.css/animate.min.css"
+    ],
+    "../fonts@copy": [
+      "font-awesome/fonts/*"
+    ],
+    "../assets/main.js@concat": [
+      "hammerjs/hammer.js",
+      "highlight.js/src/highlight.js"
+    ]
+  }
+}
