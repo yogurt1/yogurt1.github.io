@@ -1,13 +1,8 @@
 .content
-  //background: url('/assets/background.jpg')
-  //background: #eee
-  //position: absolute
-  display: flex
-  box-flex: 1
-  flex: 1
   color: black
-  //overflow: visible
+  //overflow: auto
   z-index: 2
+  flex: 1
   transform: translateX(0)
   transition: transform .3s
   &.open
@@ -15,28 +10,64 @@
 
 .page-wrap
   margin: 0 auto
-  padding: 40px 40px 40px
-  width: 1100px
+  padding: 10px 10px 10px
+  box-shadow: 0 0 40px 15px rgba(0,0,0,0.75)
+  width: 80%
   background: #fff
+  right: 0
+  left: 0
+  //position: static
   color: #333
-  font: 14pt $sans
+  float: center
+  font: 1em $sans
+  //overflow: hidden
+  //hypens: auto
+  @media (max-width: 600px)
+    padding: 0 10px 10px
+    //position: absolute
+    width: 100%
+    //float: center
+    font-size: 0.8em
+
+.text, .code, code
+  //hypens: auto
+  white-space: pre-line
+
+code, .code
+  width: 70%
+  display: block
+  left: 0
+  right: 0
+  //text-align: center
+  float: center
+  position: relative
+  font: 1em $code
+  hypens: auto
+  overflow: hidden
+  @media (max-width: 900px)
+    font: 0.8em $code
   
-.navigation-wrap
-  height: 70px
+.navigation
+  margin: 0 auto
+  width: 70%
+  //float: center
+  height: 40px
+  text-align: center
+  z-index: 9000
   position: fixed
   bottom: 0
-  z-index: 9000
-  bottom: 0
   background: #fff
-  flex: 1
-  float: center
-  margin: 0 auto
+  color: #000
+  //border: 1px solid #000
+  left: 0
+  right: 0
   font: 13pt $sans
-  box-shadow: 10px 10px 10px 0 rgba(0,0,0,.75)
-//.navigation
-//  font: 13pt $sans
-//  margin: 0 auto
-//  color: #333
-//  background: #eee
-//  & a
-//    padding: 2px 2px
+  //box-shadow: 0 0 80px 5px rgba(0,0,0,0.75)
+  box-shadow: 0 0 10px #000
+  & a
+    padding: 4px 4px
+    //margin: 10px 10px 10px
+  & a:first-child
+    padding-left: 0
+  & a:last-child
+    padding-right: 0

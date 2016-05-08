@@ -21,20 +21,25 @@ html
   font-family: $sans
 
 body
-  overflow-x: hidden
   background: #eee
   background: url('/assets/background.jpg')
+  font-family: $sans
+  font-size: 11pt
+  @media (max-width: 900px)
+    font-size: 9pt
 
 
 .body-wrap
   padding-top: 0.7em
-  font-size: 11pt
-  display: flex
+  //display: flex
   min-height: 100%
   background: none
 
 .hidden
   display: none
+
+.vishidden
+  opacity: 0
 
 .links > a
   padding-left: 3px

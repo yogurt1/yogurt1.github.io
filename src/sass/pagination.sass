@@ -1,0 +1,22 @@
+ul.pagination
+  display: inline-block
+  padding: 0
+  margin: 0
+  & li
+    display: inline
+    & a
+      color: #222
+      float: left
+      padding: 8px 16px
+      text-padding: none
+      &.active
+        background-color: #4CAF50
+        transition: background-color .3s, color .3s
+        border-radius: 5px
+        color: #eee
+        &:hover:not(.active)
+          background-color: #ddd
+          border-radius: 0
+
+.pagination-wrap
+  text-alig: center

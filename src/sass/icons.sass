@@ -7,17 +7,54 @@
   overflow: hidden
   cursor: pointer
   z-index: 9000
-  color: white
+  color: #eee
   font: 30px fontawesome
-  transition: transform .3s, left .1s, color .05s linear
+  //text-shadow: 1px 1px 1px #bbb
+  transition: transform .3s, left .1s, color .05s ease-in-out, text-shadow .3s linear
+  @media (max-width: 600px)
+    color: #222
+    &:before
+      content: 'Swipe'
   &:before
     content: '\f0c9'
+  &:hover
+    text-shadow: 1px 1px 1px #bbb
   &.open
-    transform: rotate(90deg)
+    transform: translateZ(0) rotate(90deg)
+    -webkit-transform: translateZ(0) rotate(90deg)
+    //-webkit-transform: translateZ(0);
     left: 255px
+    text-shadow: 1px 1px 2px #666
+    &:hover
+      text-shadow: 2px 2px 1px #666
     &:before
       content: '\f00d'
     color: #000
+
+#scroll-to-top
+  position: fixed
+  z-index: 9000
+  font-size: 40px
+  bottom: 30px
+  right: 10px
+  height: 10px
+  //width: 30px
+  font: 40px fontawesome
+  //background: #eee
+  //padding: 0 20px 20px 0
+  //padding: 0 10px
+  //width: 30px
+  color: #bbb
+  transition: color .3s linear, text-shadow .3s
+  &:hover
+    color: #fff
+    text-shadow: 1px 1px 1px #aaa
+  &:before
+    content: '\f106'
+  @media (max-width: 600px)
+    color: #333
+    &:hover
+      color: #111
 
 // Social
 #github,
@@ -26,7 +63,7 @@
 #twitter,
 #pocket,
 #slack,
-#star
+#star,
   font: 25px fontawesome
   color: black
   padding-left: 7px
@@ -57,14 +94,18 @@
   content: 'Twitter'
   content: '\f099'
   
-#pocket
+#pocket:before
   content: 'Pocket'
   content: '\f265'
   
-#slack
+#slack:before
   content: 'Slack'
   content: '\f198'
   
-#star
+#star:before
   content: 'Star'
   content: '\2605'
+    
+#up:before
+  content: 'Up'
+  content: '\f106'

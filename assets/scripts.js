@@ -6,7 +6,7 @@ $.fn.extend animateCss: (animationName, callback) ->
     $(@).removeClass "animated #{animationName}"
     callback()
  */
-var content, els, elsRev, isMobile, isTouch, pushbutton, sidebar,
+var content, els, isMobile, isTouch, pushbutton, scrollToTop, sidebar,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 isMobile = /Android|iP(hone|od|ad)|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -21,25 +21,35 @@ if (!isMobile) {
   });
 }
 
+scrollToTop = document.querySelector('#scroll-to-top');
+
+scrollToTop.addEventListener('click', function() {
+  var interval;
+  return interval = setInterval(function() {
+    switch (document.body.scrollTop) {
+      case 0:
+        return clearInterval(interval);
+      default:
+        return window.scrollBy(0, -40);
+    }
+  }, 50);
+});
+
 window.onscroll = function() {
-  var scrollTopTop;
-  scrollTopTop = document.querySelector('#scrolltoptop');
-  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-    return scrollTopTop.classList = "";
+  if (window.scrollY > 50) {
+    return scrollToTop.classList = "";
   } else {
-    return scrollTopTop.classList = "hidden";
+    return scrollToTop.classList = "hidden";
   }
 };
 
-sidebar = document.querySelector('.content');
+content = document.querySelector('.content');
 
-content = document.querySelector('.sidebar');
+sidebar = document.querySelector('.sidebar');
 
 pushbutton = document.querySelector('#push-sidebar');
 
 els = new Array(pushbutton, sidebar, content);
-
-elsRev = els.reverse();
 
 pushbutton.addEventListener('click', function() {
   var el, i, len, results;
@@ -51,17 +61,24 @@ pushbutton.addEventListener('click', function() {
   return results;
 });
 
-
-/*content.addEventListener 'click', ->
-  if 'open' in content.classList
-    el.classList.toggle 'open' for el in els
- */
+content.addEventListener('click', function() {
+  var el, i, len, results;
+  if (indexOf.call(content.classList, 'open') >= 0) {
+    "";
+    results = [];
+    for (i = 0, len = els.length; i < len; i++) {
+      el = els[i];
+      results.push(el.classList.toggle('open'));
+    }
+    return results;
+  }
+});
 
 if (isTouch) {
-  new Hammer(document.body).on("panleft panright", function(ev) {
-    var el, i, j, len, len1, results, results1;
+  new Hammer(document.body).on("swipeleft swiperight", function(ev) {
+    var el, i, j, len, len1, ref, results, results1;
     switch (ev.type) {
-      case "panright":
+      case "swiperight":
         results = [];
         for (i = 0, len = els.length; i < len; i++) {
           el = els[i];
@@ -69,10 +86,11 @@ if (isTouch) {
         }
         return results;
         break;
-      case "panleft":
+      case "swipeleft":
+        ref = els.reverse();
         results1 = [];
-        for (j = 0, len1 = elsRev.length; j < len1; j++) {
-          el = elsRev[j];
+        for (j = 0, len1 = ref.length; j < len1; j++) {
+          el = ref[j];
           results1.push(el.classList.remove("open"));
         }
         return results1;
