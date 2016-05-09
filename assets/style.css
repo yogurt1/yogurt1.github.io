@@ -57,12 +57,12 @@ body {
   /*@media (max-width: 540px)
     padding-top: 15px*/ }
   .sidebar.open {
-    box-shadow: 25px 25px 50px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 25px 25px 50px 0 rgba(0, 0, 0, 0.75);
     left: 0; }
 
 .links {
   position: fixed;
-  top: 93%; }
+  top: 90%; }
 
 .content {
   color: black;

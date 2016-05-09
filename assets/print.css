@@ -1,6 +1,15 @@
-@media print {
-  body {
-    background: #fff;
-    color: #000; } }
+body {
+  background: #fff;
+  color: #000; }
+
+.sidebar, .sidebar *, .navigation {
+  display: none; }
+
+.page-wrap, .content {
+  width: 100%;
+  background: #fff;
+  color: #000;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0; }
 
 /*# sourceMappingURL=print.css.map */
