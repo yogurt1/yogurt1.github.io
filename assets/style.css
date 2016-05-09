@@ -67,6 +67,7 @@ body {
 .content {
   color: black;
   z-index: 2;
+  height: 100%;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -83,6 +84,7 @@ body {
   margin: 0 auto;
   padding: 10px 10px 10px;
   box-shadow: 0 0 40px 15px rgba(0, 0, 0, 0.75);
+  height: 100%;
   width: 80%;
   background: #fff;
   right: 0;
