@@ -5,7 +5,7 @@ scrollToTop.addEventListener 'click', -> interval = setInterval ->
     when 0
       clearInterval interval
     else
-      window.scrollBy 0, -40
+      window.requestAnimationFrame -> window.scrollBy 0, -40
 , 50
 
 window.onscroll = () ->
