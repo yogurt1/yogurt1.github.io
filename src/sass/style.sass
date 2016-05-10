@@ -1,30 +1,36 @@
 $sans: "PT Sans", Helvetica, Arial, sans-serif
-$serif: "PT Serif", Times, "Times New Roman", serif
-$code: Iosevka, Monaco, Courier, "Courier New"
+$serif: "PT Serif", Times, serif
+$code: Iosevka, Courier, monospace
+//$code: Iosevka
 
 $layout: 12 .25 show
 
-*
-  margin: 0
-  padding: 0
-  &, &:before, &:after
-    box-sizing: border-box
 
 html, body
   height: 100%
 
 html
   padding: 5px 5px 5px
-  font-family: $sans
+  box-sizing: border-box
+  font: 62.5% $sans
 
 body
   background: #eee
   background: url('/assets/background.jpg')
   font-family: $sans
-  font-size: 11pt
+  font-size: 1.6em
+  font-weight: 300
+  letter-spacing: .01em
+  line-height: 1.6
   @media (max-width: 900px)
     font-size: 9pt
 
+
+*
+  margin: 0
+  padding: 0
+  &, &:before, &:after
+    box-sizing: inherit
 
 .body-wrap
   padding-top: 0.7em
@@ -46,6 +52,9 @@ body
   &:last-child
     padding-right: 0
 
+@import "typography"
+@import "icons"
+  
 @import "sidebar"
 @import "content"
-@import "icons"
+

@@ -6,16 +6,19 @@
   z-index: 6000
   flex: 1
   width: 300px
-  left: -300px
+  //left: -300px
+  left: 0
+  transform: translate3d(-300px, 0, 0)
   top: 0
   padding-top: 15px
   padding-left: 20px
   overflow: hidden
   //visibility: hidden
-  transition: left .3s, box-shadow .5s
+  transition: transform .3s, box-shadow .5s
   &.open
+    transform: translate3d(0, 0, 0)
     box-shadow: 25px 25px 50px 0 rgba(0,0,0,0.75)
-    left: 0
+    //left: 0
   /*@media (max-width: 540px)
     padding-top: 15px*/
 

@@ -6,6 +6,7 @@
   flex: 1
   transform: translateX(0)
   transition: transform .3s
+  //overflow-x: hidden
   &.open
     transform: translateX(200px)
 
@@ -20,34 +21,33 @@
   left: 0
   //position: static
   color: #333
-  float: center
-  font: 1em $sans
+  font: 1.5rem $sans
   //overflow: hidden
-  //hypens: auto
+  hypens: auto
   @media (max-width: 600px)
     padding: 0 10px 10px
-    //position: absolute
     width: 100%
     //float: center
-    font-size: 0.8em
+    font-size: 1.5rem
 
 .text, .code, code
   //hypens: auto
   white-space: pre-line
 
 code, .code
-  width: 70%
   display: block
-  left: 0
-  right: 0
-  //text-align: center
-  float: center
-  position: relative
-  font: 1em $code
-  hypens: auto
-  overflow: hidden
-  @media (max-width: 900px)
-    font: 0.8em $code
+  background: #eee
+  color: #111
+  border-left: .3rem solid #9b4dca
+  border-radius: 3px
+  padding: 1rem 1.5rem
+  margin: 1rem 1.5rem
+  //position: relative
+  font: 86% $code
+  //hypens: auto
+  //overflow: hidden
+  /*@media (max-width: 900px)
+    font: 0.8em $code*/
   
 .navigation
   margin: 0 auto
