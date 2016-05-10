@@ -10,14 +10,14 @@ pushbutton.addEventListener 'click', ->
 
 content.addEventListener 'click', ->
   if 'open' in content.classList
-    ""
+    #""
     el.classList.toggle 'open' for el in els
 #      el.classList.toggle 'open'
 
 # HammerJS Touch Event Handler
 if isTouch
   new Hammer document.body
-    .on "swipeleft swiperight", (ev) ->
+  .on "swipeleft swiperight", (ev) ->
       switch ev.type
         when "swiperight"
           el.classList.add "open" for el in els

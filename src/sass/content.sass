@@ -1,7 +1,7 @@
 .content
   color: black
   //overflow: auto
-  z-index: 2
+  z-index: 1
   height: 100%
   flex: 1
   transform: translateX(0)
@@ -30,21 +30,23 @@
     //float: center
     font-size: 1.5rem
 
-.text, .code, code
-  hypens: auto
-  white-space: pre-line
-
 code, .code
-  display: block
-  background: #eee
-  color: #111
-  border-left: .3rem solid #9b4dca
-  border-radius: 3px
-  padding: 1rem 1.5rem
-  margin: 1rem 1.5rem
-  //position: relative
-  font: 86% $code
   hypens: auto
+  white-space: pre-wrap
+  display: block
+  background: rgba(243,243,243,0.5)
+  color: #666
+  padding: 0.5rem 1rem
+  margin: 1.5rem 1.5rem
+  //margin-bottom: 1rem
+  line-height: 140%
+  //z-index: 3
+  border-left: .2rem solid #9b4dca
+  font: 95% $code
+  hypens: auto
+  //width: 50%
+  //height: 1%
+  //clear: both
   //overflow: hidden
   /*@media (max-width: 900px)
     font: 0.8em $code*/
