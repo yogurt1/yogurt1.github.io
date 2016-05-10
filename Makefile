@@ -2,7 +2,7 @@ GULP=./node_modules/.bin/gulp
 #COMPASS=compass
 
 build: 
-	$(GULP) build
+	env NODE_ENV=production $(GULP) build
 
 serve:
 	$(GULP) build watch serve
