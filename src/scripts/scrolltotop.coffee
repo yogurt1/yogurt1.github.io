@@ -5,11 +5,8 @@ scrollToTop.addEventListener 'click', -> interval = setInterval ->
     when 0
       clearInterval interval
     else
-      window.requestAnimationFrame -> window.scrollBy 0, -40
-, 50
+      window.scrollBy 0, -40
+, 1000 / 60
 
-window.onscroll = () ->
-  if window.scrollY > 50
-    scrollToTop.classList = ""
-  else
-    scrollToTop.classList = "hidden"
+window.addEventListener 'scroll', -> scrollToTop.classList =
+  if window.pageYOffset > 50 then "" else "hidden"
