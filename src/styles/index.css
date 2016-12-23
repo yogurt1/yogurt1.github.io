@@ -1,0 +1,8 @@
+/* vendor */
+@import "normalize.css"; 
+@import "skeleton.css"; 
+
+body {
+    background: #efe;
+    color: black;
+}
