@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="page home">
         <div class="container">
             <div class="row">
-                <div class="col-xs">
-                    <h1>&lt; full-stack &gt;</h1>
+                <div>
+                    <h5>&lt; full-stack &gt;</h5>
                     <p>
                        javascript developer
                     </p>
@@ -11,18 +11,45 @@
                         {{ $t("message.hello") }}
                     </p>
                 </div>
+                <div>
+                    <counter></counter>
+                </div>
             </div>
+            <form @submit="submit">
+                <select name="locale">
+                    <option
+                        v-for="locale in locales"
+                        :class="locale">
+                        {{ locale }}
+                    </option>
+                </select>
+                <input
+                    type="submit"
+                    class="primary"
+                    value="Submit">
+            </form>
         </div>
     </div>
 </template>
 
 <script>
 import Counter from "./Counter"
+import {actions} from "../store"
 
 export default {
     data() {
         return {
+            locales: ["en", "ru"],
             msg: "Home"
+        }
+    },
+
+    methods: {
+        submit(ev) {
+            ev.preventDefault()
+            const form = new FormData(ev.target)
+            const locale = form.get("locale")
+            actions.setLocale(locale)
         }
     },
 
@@ -31,3 +58,8 @@ export default {
     }
 }
 </script>
+
+<style>
+.home {
+}
+</style>

@@ -1,37 +1,43 @@
 <template>
-    <div>
-        <div>
+    <div class="row">
             <h3>
-                Value: {{ count }}
+                CNT: {{ counter }}
             </h3>
-        </div>
-        <button @click="incr">+</button>
-        <button @click="decr">-</button>
-        <button @click="incrIfOdd">Incr if odd</button>
-        <button @click="incrAsync">Incr async (1s)</button>
-        <div>
-            <p>
-                Recent History (last 5 entries): {{ recentHistory }}
-            </p>
-        </div>
+            <button @click="incr">+</button>
+            <button @click="decr">-</button>
+            <button @click="reset">0</button>
+            <button @click="start">auto</button>
     </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from "vuex"
+import {actions, mix} from "../store"
 
 export default {
-    computed: mapGetters([
-        "count",
-        "recentHistory"
-    ]),
-    methods: mapActions([
-        "incr",
-        "decr",
-        "incrIfOdd",
-        "incrAsync"
-    ])
+    data() {
+        return {
+            counter: this.$select("counter")
+        }
+    },
+    methods: mix({
+        stop() {
+            clearInterval(this.interval)
+            this.interval = void(0)
+        },
+
+        start() {
+            if (this.interval) {
+                return this.stop()
+            }
+
+            this.interval = setInterval(() =>
+                actions.incr(), 900)
+        },
+
+        reset() {
+            this.stop()
+            store.actions.reset()
+        }
+    })
 }
 </script>
-
-

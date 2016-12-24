@@ -6,6 +6,7 @@ const isProduction = process.env.NODE_ENV === "production"
 
 const config = module.exports = {
     devServer: {
+        clientLogLevel: "none",
         inline: true,
         hot: true,
         stats: "errors-only",
@@ -48,8 +49,12 @@ const config = module.exports = {
                 test: /\.js$/,
                 loader: "buble-loader",
                 options: {
-                    modules: false,
-                    dangerousForOf: true
+                    objectAssign: "Object.assign",
+                    transforms: {
+                        modules: false,
+                        dangerousForOf: true,
+                        dangerousTaggedTemplateString: true
+                    }
                 }
             },
             {

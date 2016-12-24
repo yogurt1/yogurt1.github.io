@@ -1,33 +1,31 @@
-import {Store} from "vuex"
-import * as actions from "./actions"
-import * as getters from "./getters"
-import * as mutations from "./mutations"
+import Vue from "vue"
+import Revue from "revue"
+import {createStore, bindActionCreators, applyMiddleware} from "redux"
+import {composeWithDevTools as compose} from "redux-devtools-extension"
+import thunk from "redux-thunk"
+import combinedReducers from "./reducers"
+import _actions from "./actions"
 
-export default function configureStore() {
+const getPersistedState = () => void 0
+const middleware = [thunk]
 
-    const initialState = {
-        count: 0,
-        history: []
-    }
+const persistedState = getPersistedState()
+const reduxStore = createStore(combinedReducers,
+    persistedState, compose(
+        applyMiddleware(...middleware)))
 
-    const store = new Store({
-        state: initialState,
-        getters,
-        actions,
-        mutations
-    })
+export const actions = bindActionCreators(_actions,
+    reduxStore.dispatch)
 
-    if (module.hot) {
-        module.hot.accept([
-            "./getters",
-            "./actions",
-            "./mutations"
-        ], () => store.hotUpdate({
-            getters: require("./getters"),
-            actions: require("./actions"),
-            mutations: require("./mutations")
-        }))
-    }
+export const mix = methods => ({
+    ...actions,
+    ...methods
+})
 
-    return store
-}
+const store = new Revue(Vue, reduxStore, actions)
+export default store
+
+if (module.hot) module.hot.accept("./reducers", () => {
+    const nextCombinedReducers = require("./reducers").default
+    reduxStore.replaceReducer(nextCombinedReducers)
+})

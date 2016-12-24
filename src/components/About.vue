@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>
-            <img :src="logo.js"></img>
+            <img src="assets/logo.jpg"></img>
             Full-stack PHP/Node.js and JavaScript developer
         </p>
         <p>
@@ -12,20 +12,6 @@
         </p>
     </div>
 </template>
-
-<script>
-import jsLogo from "app/assets/js_logo.jpg"
-
-export default {
-    data() {
-        return {
-            logo: {
-                js: ""
-            }
-        }
-    }
-}
-</script>
 
 <style>
 

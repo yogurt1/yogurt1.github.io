@@ -1,8 +1,9 @@
-/* vendor */
-@import "normalize.css"; 
-@import "skeleton.css"; 
-
 body {
-    background: #efe;
+    font-family: Arial, sans-serif;
+    background: #fef;
     color: black;
+}
+
+.page {
+    padding-top: 15px;
 }
