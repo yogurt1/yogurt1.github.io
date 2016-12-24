@@ -1,7 +1,7 @@
 import Vue from "vue"
 import Revue from "revue"
 import {createStore, bindActionCreators, applyMiddleware} from "redux"
-import {composeWithDevTools as compose} from "redux-devtools-extension"
+import {composeWithDevTools as compose} from "redux-devtools-extension/developmentOnly"
 import thunk from "redux-thunk"
 import combinedReducers from "./reducers"
 import _actions from "./actions"

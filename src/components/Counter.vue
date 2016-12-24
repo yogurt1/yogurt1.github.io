@@ -36,7 +36,7 @@ export default {
 
         reset() {
             this.stop()
-            store.actions.reset()
+            actions.reset()
         }
     })
 }

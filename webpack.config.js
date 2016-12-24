@@ -86,6 +86,7 @@ const config = module.exports = {
 }
 
 if (isProduction) {
+    // config.devtool = "source-map"
     config.plugins.push(
         new webpack.optimize.UglifyJsPlugin({
             compress: {
