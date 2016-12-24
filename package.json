@@ -23,6 +23,7 @@
     "vue-loader": "^10.0.2",
     "vue-template-compiler": "^2.1.6",
     "webpack": "2.1.0-beta.28",
+    "webpack-bundle-analyzer": "^2.2.1",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-dev-server": "beta",
     "webpack-hot-middleware": "^2.13.2"
@@ -31,6 +32,7 @@
     "es6-promise": "^4.0.5",
     "jquery": "^3.1.1",
     "lodash": "^4.17.2",
+    "object-assign": "^4.1.0",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^1.0.0",
     "redux-thunk": "^2.1.0",

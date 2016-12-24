@@ -17,10 +17,8 @@ const reduxStore = createStore(combinedReducers,
 export const actions = bindActionCreators(_actions,
     reduxStore.dispatch)
 
-export const mix = methods => ({
-    ...actions,
-    ...methods
-})
+export const mix = methods => Object.assign({},
+    actions, methods)
 
 const store = new Revue(Vue, reduxStore, actions)
 export default store

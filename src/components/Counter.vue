@@ -3,8 +3,12 @@
             <h3>
                 CNT: {{ counter }}
             </h3>
-            <button @click="incr">+</button>
-            <button @click="decr">-</button>
+            <button @click="incr">
+                <i class="ion-plus"></i>
+            </button>
+            <button @click="decr">
+                <i class="ion-minus"></i>
+            </button>
             <button @click="reset">0</button>
             <button @click="start">auto</button>
     </div>

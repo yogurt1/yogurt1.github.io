@@ -7,9 +7,7 @@
                     <p>
                        javascript developer
                     </p>
-                    <p>
-                        {{ $t("message.hello") }}
-                    </p>
+                    <h2>{{ $t("message.hello") }}</h2>
                 </div>
                 <div>
                     <counter></counter>

@@ -2,6 +2,7 @@ const path = require("path")
 const webpack = require("webpack")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const HtmlPlugin = require("html-webpack-plugin")
+const {BundleAnalyzerPlugin} = require("webpack-bundle-analyzer")
 const isProduction = process.env.NODE_ENV === "production"
 
 const config = module.exports = {
@@ -14,7 +15,7 @@ const config = module.exports = {
         historyApiFallback: true
     },
     performance: {
-        hints: isProduction
+        hints: false // isProduction
     },
     entry: ["./src/entry.js"],
     output: {
@@ -49,6 +50,7 @@ const config = module.exports = {
                 test: /\.js$/,
                 loader: "buble-loader",
                 options: {
+                    sourceMap: true,
                     objectAssign: "Object.assign",
                     transforms: {
                         modules: false,
@@ -76,8 +78,8 @@ const config = module.exports = {
                 loader: "vue-loader",
                 options: {
                     "css": ExtractTextPlugin.extract({
-                         fallbackLoader: "vue-style-loader",
-                         loader: "css-loader"
+                        fallbackLoader: "vue-style-loader",
+                        loader: "css-loader"
                     })
                 }
             }
@@ -89,11 +91,17 @@ if (isProduction) {
     // config.devtool = "source-map"
     config.plugins.push(
         new webpack.optimize.UglifyJsPlugin({
+            sourcemap: true,
+            sourceMap: true,
             compress: {
                 warnings: false,
                 drop_console: true,
                 drop_debugger: true
             }
+        }),
+        new BundleAnalyzerPlugin({
+            openAnalyzer: false,
+            analyzerMode: "static"
         })
     )
 }

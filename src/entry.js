@@ -1,5 +1,5 @@
 import "./styles/index.css"
-import "es6-promise/auto"
+import "./polyfills"
 import Vue from "vue"
 import App from "./components/App"
 import store from "./store"
