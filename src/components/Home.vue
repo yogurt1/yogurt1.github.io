@@ -7,6 +7,9 @@
                     <p>
                        javascript developer
                     </p>
+                    <p>
+                        {{ $t("message.hello") }}
+                    </p>
                 </div>
             </div>
         </div>
