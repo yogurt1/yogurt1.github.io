@@ -1,5 +1,6 @@
 import "./styles/index.css"
-import "es6-promise/dist/es6-promise.auto.min.js"
+// import "es6-promise/dist/es6-promise.auto.min.js"
+import "es6-promise/auto"
 import Vue from "vue"
 import Vuex from "vuex"
 import VueRouter from "vue-router"
