@@ -6,6 +6,12 @@ import store from "./store"
 import router from "./router"
 import "./locales"
 
+if (process.env.NODE_ENV !== "production") {
+    window.store = store
+}
+
+store.actions.getPosts()
+
 new Vue({
     router,
     store,
