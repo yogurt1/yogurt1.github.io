@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="post" v-if="post">
             <p v-html="post.content"></p>
         </div>
@@ -10,6 +10,13 @@
 </template>
 
 <script>
+import {createSelector} from "reselect"
+
+const createPostSelector = id => createSelector(
+    posts => posts,
+    posts => posts[id]
+)
+
 export default {
     data() {
         return {
@@ -17,15 +24,16 @@ export default {
         }
     },
 
+    created() {
+        const {id} = this.$route.params
+        this.postSelector = createPostSelector(id)
+    },
+
     computed: {
         post() {
-            const {id} = this.$route.params
-    
-            if (typeof(id) === "undefined") {
-                return null
-            }
-
-            return this.posts[id]
+            const {posts, postSelector} = this
+            const post = postSelector(posts)
+            return post
         }
     }
 }

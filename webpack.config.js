@@ -21,7 +21,7 @@ const config = module.exports = {
     output: {
         filename: "bundle.js",
         path: path.resolve("./dist"),
-        publicPath: isProduction ? "dist/" : "",
+        publicPath: isProduction ? "dist/" : "/",
     },
     plugins: [
         new ExtractTextPlugin({

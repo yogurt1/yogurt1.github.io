@@ -11,7 +11,7 @@ export const routes = [
     route("/", Home),
     route("/about", About),
     route("/blog", Blog),
-    route("/post/:id", Post, {name: "post"})
+    route("/blog/:id", Post, {name: "post"})
 ]
 
 Vue.use(VueRouter)

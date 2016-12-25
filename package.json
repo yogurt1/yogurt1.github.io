@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "clean": "rm -rf dist/*",
     "test": "ava test",
     "dev": "node devServer",
     "build": "cross-env NODE_ENV=production webpack"
@@ -36,6 +37,7 @@
     "redux": "^3.6.0",
     "redux-devtools-extension": "^1.0.0",
     "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.4",
     "revue": "^3.0.0",
     "vue": "^2.1.6",
     "vue-i18n": "^4.9.0",

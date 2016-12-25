@@ -6,7 +6,8 @@ const PORT = process.env.PORT || 3000
 
 config.entry.unshift(
     // `webpack-dev-server/client?http://localhost:${PORT}`,
-    "webpack-hot-middleware/client?reload=false"
+    // "webpack/hot/only-dev-server"
+    "webpack-hot-middleware/client?noInfo=true"
 )
 config.devtool = "eval"
 config.plugins.unshift(

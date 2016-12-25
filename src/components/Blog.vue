@@ -1,5 +1,5 @@
 <template>
-    <div class="blog">
+    <div class="container blog">
         <h2>blog</h2>
         <hr />
         <div
