@@ -1,17 +1,15 @@
 import Vue from "vue"
 import Revue from "revue"
 import {createStore, bindActionCreators, applyMiddleware} from "redux"
-import {composeWithDevTools as compose} from "redux-devtools-extension/developmentOnly"
+import {composeWithDevTools} from "redux-devtools-extension/developmentOnly"
 import thunk from "redux-thunk"
 import combinedReducers from "./reducers"
 import _actions from "./actions"
 
-const getPersistedState = () => void 0
+const persistedState = void(null)
 const middleware = [thunk]
-
-const persistedState = getPersistedState()
 const reduxStore = createStore(combinedReducers,
-    persistedState, compose(
+    persistedState, composeWithDevTools(
         applyMiddleware(...middleware)))
 
 export const actions = bindActionCreators(_actions,
@@ -22,6 +20,10 @@ export const mix = methods => Object.assign({},
 
 const store = new Revue(Vue, reduxStore, actions)
 export default store
+
+if (process.env.NODE_ENV !== "production") {
+    window["__STORE__"] = store
+}
 
 if (module.hot) module.hot.accept("./reducers", () => {
     const nextCombinedReducers = require("./reducers").default

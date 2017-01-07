@@ -24,7 +24,8 @@
                 <input
                     type="submit"
                     class="primary"
-                    value="Submit">
+                    :value="changeLocale"
+                />
             </form>
         </div>
     </div>
@@ -39,6 +40,12 @@ export default {
         return {
             locales: ["en", "ru"],
             msg: "Home"
+        }
+    },
+
+    computed: {
+        changeLocale() {
+            return this.$t("message.changeLocale")
         }
     },
 

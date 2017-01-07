@@ -12,7 +12,7 @@
 <script>
 import {createSelector} from "reselect"
 
-const createPostSelector = id => createSelector(
+const selectPost = id => createSelector(
     posts => posts,
     posts => posts[id]
 )
@@ -26,7 +26,7 @@ export default {
 
     created() {
         const {id} = this.$route.params
-        this.postSelector = createPostSelector(id)
+        this.postSelector = selectPost(id)
     },
 
     computed: {
