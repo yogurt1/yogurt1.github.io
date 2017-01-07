@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import {actions} from "../store"
-
 export default {
     data() {
         return {
