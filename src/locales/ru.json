@@ -1,5 +1,5 @@
 {
-  "message": {
+  "messages": {
     "hello": "Привет",
     "changeLocale": "Применить"
   }

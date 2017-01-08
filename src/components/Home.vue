@@ -2,69 +2,38 @@
     <div class="page home">
         <div class="container">
             <div class="row">
-                <div>
-                    <h5>&lt; full-stack &gt;</h5>
+                <div class="about">
+                    <h5 class="developer-tag">
+                        &lt;developer <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;message="<span class="hello-msg">{{ $t("messages.hello") }}</span>" <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;justFor="fun" <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;lang="js" <br />
+                        /&gt;
+                    </h5>
                     <p>
                        javascript developer
-                    </p>
-                    <h2>{{ $t("message.hello") }}</h2>
-                </div>
-                <div>
-                    <counter></counter>
+                   </p>
                 </div>
             </div>
-            <form @submit="submit">
-                <select name="locale">
-                    <option
-                        v-for="locale in locales"
-                        :class="locale">
-                        {{ locale }}
-                    </option>
-                </select>
-                <input
-                    type="submit"
-                    class="primary"
-                    :value="changeLocale"
-                />
-            </form>
         </div>
     </div>
 </template>
 
 <script>
-import Counter from "./Counter"
-import {actions} from "../store"
+import ChangeLocale from "./ChangeLocale.vue"
 
 export default {
-    data() {
-        return {
-            locales: ["en", "ru"],
-            msg: "Home"
-        }
-    },
-
-    computed: {
-        changeLocale() {
-            return this.$t("message.changeLocale")
-        }
-    },
-
-    methods: {
-        submit(ev) {
-            ev.preventDefault()
-            const form = new FormData(ev.target)
-            const locale = form.get("locale")
-            actions.setLocale(locale)
-        }
-    },
-
-    components: {
-        Counter
-    }
+    name: "Home"
 }
 </script>
 
 <style>
-.home {
+.developer-tag {
+    & .hello-msg {
+        text-transform: lowercase;
+        text-decoration: underline;
+        color: #00bcd4;
+
+    }
 }
 </style>

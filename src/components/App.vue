@@ -1,24 +1,72 @@
 <template>
     <div id="app">
-        <div class="container top-menu">
+        <div class="top-bar">
+            <div class="top-logo">
+                <change-locale />
+                <span v-if="ui.loading">loading...</span>
+            </div>
             <nav class="top-nav">
                 <router-link to="/" exact>Home</router-link>
-                <router-link to="/about">About</router-link>
+                <router-link to="/counter">Counter</router-link>
                 <router-link to="/blog">Blog</router-link>
+                <router-link to="/about">About</router-link>
             </nav>
         </div>
-        <router-view></router-view>
+        <div class="content">
+            <router-view />
+        </div>
     </div>
 </template>
 
+<script>
+import ChangeLocale from "./ChangeLocale"
+
+export default {
+    data() {
+        return {
+            ui: this.$select("ui")
+        }
+    },
+
+    components: {
+        ChangeLocale
+    }
+}
+</script>
+
 <style>
-.top-nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 0 auto;
-    width: 60%;
-    padding: 15px;
+#app {
+    width: 100vw;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #fef;
+    color: black;
+}
+
+.page {
+    /* padding-top: 15px; */
+}
+
+.content {
+    padding: 5px;
+    margin-top: 56px;
+}
+
+.top-bar {
+    font-size: 13pt;
+    height: 56px;
+    padding: 5px;
+    
+    & .top-logo {
+        float: left;
+    }
+    
+    & .top-nav {
+        float: right;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
 }
 
 .top-nav a {
@@ -27,14 +75,13 @@
     color: black;
     text-align: center;
     padding: 4px;
-}
+    text-transform: uppercase;
 
-.top-nav a.router-link-active,
-.top-nav a:hover,
-.top-nav a:focus {
-    color: white;
-    border-radius: 14px;
-    background: rgb(7, 4, 239);
-    font-weight: 500;
+    &.router-link-active,
+    &:hover,
+    &:focus {
+        color: black;
+        text-decoration: underline;
+    }
 }
 </style>

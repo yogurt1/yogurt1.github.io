@@ -1,4 +1,4 @@
-import "./styles/index.css"
+// import "./styles/index.css"
 import "./polyfills"
 import Vue from "vue"
 import App from "./components/App"
@@ -14,5 +14,7 @@ new Vue({
     el: "#app",
     render: h => h(App)
 })
+
+window.onload = () => store.actions.setLoading(false)
 
 if (module.hot) module.hot.accept()

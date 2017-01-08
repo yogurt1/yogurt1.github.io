@@ -1,6 +1,6 @@
 {
-  "message": {
-    "hello": "Hello",
+  "messages": {
+    "hello": "Hi",
     "changeLocale": "Ok"
   }
 }

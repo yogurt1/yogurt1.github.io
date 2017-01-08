@@ -9,7 +9,7 @@ config.entry.unshift(
     // "webpack/hot/only-dev-server"
     "webpack-hot-middleware/client?noInfo=true"
 )
-config.devtool = "eval"
+config.devtool = "cheap-module-inline-source-map"
 config.plugins.unshift(
     new webpack.NamedModulesPlugin(),
     new webpack.NoErrorsPlugin(),

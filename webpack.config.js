@@ -1,5 +1,6 @@
 const path = require("path")
 const webpack = require("webpack")
+const postcssConfig = require("./postcss.config")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const HtmlPlugin = require("html-webpack-plugin")
 const {BundleAnalyzerPlugin} = require("webpack-bundle-analyzer")
@@ -25,14 +26,14 @@ const config = module.exports = {
     },
     plugins: [
         new ExtractTextPlugin({
-            disable: true, // !isProduction,
+            disable: !isProduction,
             allChunks: true,
-            filenamename: "styles.css"
+            filename: "styles.css"
         }),
         new webpack.LoaderOptionsPlugin({
             debug: true,
             minimize: isProduction,
-            autoprefixer: true        
+            autoprefixer: true
         }),
         new webpack.DefinePlugin({
             "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
@@ -63,7 +64,7 @@ const config = module.exports = {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: "style-loader",
-                    loader: "css-loader"
+                    loader: "css-loader?importLoaders=1!postcss-loader"
                 })
             },
             {
@@ -77,6 +78,7 @@ const config = module.exports = {
                 test: /\.vue$/,
                 loader: "vue-loader",
                 options: {
+                    "postcss": ctx => postcssConfig(ctx).plugins,
                     "css": ExtractTextPlugin.extract({
                         fallbackLoader: "vue-style-loader",
                         loader: "css-loader"
