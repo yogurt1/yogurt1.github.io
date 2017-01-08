@@ -28,16 +28,18 @@ export default {
 </script>
 
 <style>
-.spinner {
-    --offset: 126;
-    --duration: 1.4s;
+:root {
+    --spinner-offset: 126;
+    --spinner-duration: 1.4s;
+}
 
+.spinner {
     position: fixed;
     z-index: 999;
     right: 15px;
     bottom: 15px;
     transition: opacity .15s ease;
-    animation: rotator var(--duration) linear infinite;
+    animation: rotator var(--spinner-duration) linear infinite;
     animation-play-state: paused;
   
     &.show {
@@ -65,24 +67,24 @@ export default {
 
 .spinner .path {
   stroke: #ff6600;
-  stroke-dasharray: var(--offset);
+  stroke-dasharray: var(--spinner-offset);
   stroke-dashoffset: 0;
   transform-origin: center;
-  animation: dash var(--duration) ease-in-out infinite;
+  animation: dash var(--spinner-duration) ease-in-out infinite;
 }
 
 @keyframes dash {
     0% {
-        stroke-dashoffset: var(--offset);
+        stroke-dashoffset: var(--spinner-offset);
     }
     
     50% {
-        stroke-dashoffset: calc(var(--offset) / 2);
+        stroke-dashoffset: calc(var(--spinner-offset) / 2);
         transform: rotate(135deg);
     }
 
     100% {
-        stroke-dashoffset: var(--offset);
+        stroke-dashoffset: var(--spinner-offset);
         transform: rotate(450deg);
     }
 }
