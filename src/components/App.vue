@@ -3,7 +3,7 @@
         <div class="top-bar">
             <div class="top-logo">
                 <change-locale />
-                <span v-if="ui.loading">loading...</span>
+                <spinner :show="ui.loading" />
             </div>
             <nav class="top-nav">
                 <router-link to="/" exact>Home</router-link>
@@ -20,8 +20,10 @@
 
 <script>
 import ChangeLocale from "./ChangeLocale"
+import Spinner from "./Spinner"
 
 export default {
+    name: "App",
     data() {
         return {
             ui: this.$select("ui")
@@ -29,6 +31,7 @@ export default {
     },
 
     components: {
+        Spinner,
         ChangeLocale
     }
 }

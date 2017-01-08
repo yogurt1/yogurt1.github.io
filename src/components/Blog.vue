@@ -16,11 +16,17 @@
 </template>
 
 <script>
+import {actions} from "../store"    
+
 export default {
     data() {
         return {
             posts: this.$select("posts")
         }
+    },
+
+    mounted() {
+        actions.getPosts()
     }
 }
 </script>

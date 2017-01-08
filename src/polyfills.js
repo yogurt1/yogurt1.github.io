@@ -1,3 +1,4 @@
+import "whatwg-fetch"
 import "es6-promise/auto"
 import objectAssign from "object-assign"
 
