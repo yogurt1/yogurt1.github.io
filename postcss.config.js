@@ -1,9 +1,17 @@
 const cssnext = require("postcss-cssnext")
-const cssVariables = require("postcss-css-variables")
+const utilities = require("postcss-utilities")
+const responsiveFont = require("postcss-responsive-font")
+const placehold = require("postcss-placehold")
+const instagram = require("postcss-instagram")
+const animation = require("postcss-animation")
 
 module.exports = ctx => ({
     plugins: [
-        cssVariables(),
+        animation(),
+        placehold(),
+        instagram(),
+        responsiveFont(),
+        utilities(),
         cssnext({
             browsers: [
                 "iOS 8",

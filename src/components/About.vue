@@ -2,13 +2,10 @@
     <div>
         <p>
             <img src="assets/logo.jpg"></img>
-            Full-stack PHP/Node.js and JavaScript developer
+            Full-stack JavaScript/TypeScript and Node.js developer
         </p>
         <p>
-            DevOps CI/CD expert
-        </p>
-        <p>
-            Junior Java Spring developer
+            Junior DevOps CI/CD
         </p>
     </div>
 </template>

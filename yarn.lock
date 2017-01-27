@@ -2061,7 +2061,7 @@ escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
 
-escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.3, escape-string-regexp@^1.0.4, escape-string-regexp@^1.0.5:
+escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.4, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
@@ -2255,10 +2255,6 @@ express@^4.13.3, express@^4.14.0:
     type-is "~1.6.13"
     utils-merge "1.0.0"
     vary "~1.1.0"
-
-extend@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/extend/-/extend-2.0.1.tgz#1ee8010689e7395ff9448241c98652bc759a8260"
 
 extend@~3.0.0:
   version "3.0.0"
@@ -3952,6 +3948,19 @@ portfinder@^1.0.9:
     debug "^2.2.0"
     mkdirp "0.5.x"
 
+postcss-animation-data@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/postcss-animation-data/-/postcss-animation-data-0.0.4.tgz#42ad0699bf9d627a014d98a3263e997ff5409fdf"
+  dependencies:
+    postcss "^5.0"
+
+postcss-animation@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/postcss-animation/-/postcss-animation-0.0.11.tgz#a850b5262357cbbe171a7c1a1148702c2949f10a"
+  dependencies:
+    postcss "^5.0"
+    postcss-animation-data "^0.0.4"
+
 postcss-apply@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/postcss-apply/-/postcss-apply-0.3.0.tgz#a2f37c5bdfa881e4c15f4f245ec0cd96dd2e70d5"
@@ -4053,14 +4062,6 @@ postcss-convert-values@^2.3.4:
   dependencies:
     postcss "^5.0.11"
     postcss-value-parser "^3.1.2"
-
-postcss-css-variables@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/postcss-css-variables/-/postcss-css-variables-0.6.0.tgz#74afacf34468e055ba7cbe7a2d16ecbbee17bbac"
-  dependencies:
-    escape-string-regexp "^1.0.3"
-    extend "^2.0.1"
-    postcss "^5.0.5"
 
 postcss-cssnext@^2.9.0:
   version "2.9.0"
@@ -4167,6 +4168,12 @@ postcss-initial@^1.3.1:
   dependencies:
     lodash.template "^4.2.4"
     postcss "^5.0.19"
+
+postcss-instagram@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-instagram/-/postcss-instagram-1.0.0.tgz#7c3c0803478237c54479dfcc93a805891dd737fb"
+  dependencies:
+    postcss "^5.0.5"
 
 postcss-load-config@^1.0.0:
   version "1.0.0"
@@ -4319,6 +4326,12 @@ postcss-ordered-values@^2.1.0:
     postcss "^5.0.4"
     postcss-value-parser "^3.0.1"
 
+postcss-placehold@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/postcss-placehold/-/postcss-placehold-1.2.0.tgz#353d96f471b572485ba4156d43087dcf2d88f25b"
+  dependencies:
+    postcss "^5.0.21"
+
 postcss-pseudo-class-any-link@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/postcss-pseudo-class-any-link/-/postcss-pseudo-class-any-link-1.0.0.tgz#903239196401d335fe73ac756186fa62e693af26"
@@ -4359,6 +4372,12 @@ postcss-replace-overflow-wrap@^1.0.0:
   dependencies:
     postcss "^5.0.16"
 
+postcss-responsive-font@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-responsive-font/-/postcss-responsive-font-1.0.0.tgz#61deba0d59cc89beacef25e62fe8f0fd0068de47"
+  dependencies:
+    postcss "^5.2.5"
+
 postcss-selector-matches@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/postcss-selector-matches/-/postcss-selector-matches-2.0.5.tgz#fa0f43be57b68e77aa4cd11807023492a131027f"
@@ -4389,12 +4408,6 @@ postcss-selector-parser@^2.0.0, postcss-selector-parser@^2.2.0:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss-simple-vars@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-simple-vars/-/postcss-simple-vars-3.0.0.tgz#1fa4ccb4b7151d9f0d52fb8ea19a15c1319599d6"
-  dependencies:
-    postcss "^5.0.21"
-
 postcss-svgo@^2.1.1:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/postcss-svgo/-/postcss-svgo-2.1.6.tgz#b6df18aa613b666e133f08adb5219c2684ac108d"
@@ -4412,6 +4425,13 @@ postcss-unique-selectors@^2.0.2:
     postcss "^5.0.4"
     uniqs "^2.0.0"
 
+postcss-utilities@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/postcss-utilities/-/postcss-utilities-0.6.1.tgz#efd88c655ba2fda7e52e09ab808134802e2b2366"
+  dependencies:
+    postcss "^5.0.16"
+    postcss-value-parser "^3.3.0"
+
 postcss-value-parser@^3.0.1, postcss-value-parser@^3.0.2, postcss-value-parser@^3.1.1, postcss-value-parser@^3.1.2, postcss-value-parser@^3.2.3, postcss-value-parser@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.0.tgz#87f38f9f18f774a4ab4c8a232f5c5ce8872a9d15"
@@ -4424,7 +4444,7 @@ postcss-zindex@^2.0.1:
     postcss "^5.0.4"
     uniqs "^2.0.0"
 
-postcss@^5.0.0, postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.19, postcss@^5.0.2, postcss@^5.0.21, postcss@^5.0.3, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.6, postcss@^5.0.8, postcss@^5.1.1, postcss@^5.2.0, postcss@^5.2.6, postcss@^5.2.8:
+postcss@^5.0, postcss@^5.0.0, postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.19, postcss@^5.0.2, postcss@^5.0.21, postcss@^5.0.3, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.6, postcss@^5.0.8, postcss@^5.1.1, postcss@^5.2.0, postcss@^5.2.5, postcss@^5.2.6, postcss@^5.2.8:
   version "5.2.8"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-5.2.8.tgz#05720c49df23c79bda51fd01daeb1e9222e94390"
   dependencies:
