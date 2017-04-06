@@ -1,22 +1,18 @@
 import Vue from "vue"
-import VueI18n from "vue-i18n"
+import * as R from "ramda"
 
-Vue.use(VueI18n)
-Vue.config.lang = "ru"
+const context = require.context("./", false, /\.json$/)
+const setupLocales = R.forEach(key => {
+    const [,locale] = key.match(/\.\/(\w+)\.json/)
+    Vue.locale(locale, context(key))
+})
 
-const setupLocales = () => {
-    const context = require.context("./", false, /\.json$/)
+setupLocales(context)
 
-    for (const key of context.keys()) {
-        const locale = key.match(/\.\/(\w+)\.json/)[1]
-        Vue.locale(locale, context(key))
-    }
-
-    return context
+if (module.hot) {
+    module.hot.accept(context.keys(), () => {
+        setupLocales(context)
+    })
 }
 
-const context = setupLocales()
 
-if (module.hot) module.hot.accept(context.keys(), () => {
-    setupLocales()
-})

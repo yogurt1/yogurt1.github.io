@@ -1,43 +1,88 @@
 // import "./styles/index.css"
 import "./polyfills"
-import Vue from "vue"
+import * as R from "ramda"
+import * as Vue from "vue"
+import * as VueI18n from "vue-i18n"
+import * as VueRouter from "vue-router"
+import * as Revue from "revue"
 import App from "./components/App"
-import store from "./store"
-import router from "./router"
+import routes from "./routes"
+import configureStore from "./store"
+import * as actions from "./store/actions"
 import "./locales"
 
-// store.actions.getPosts()
+const preloadedState = JSON.parse(
+    localStorage.getItem("state")
+)
+const targetNode = document.getElementById("app")
+const store = configureStore(preloadedState || undefined)
+const setLoading = R.pipe(
+    actions.ui.setLoading,
+    store.dispatch
+)
 
-new Vue({
-    router,
-    store,
-    el: "#app",
-    render: h => h(App)
-})
 
-const observer = () => new MutationObserver((mutations, observer) => {
-    const stopLoading = () => store.actions.setLoading(false)
-    const startLoading = () => store.actions.setLoading()
-
-    for (const mutation of mutations) {
-        for (const node of mutation.addedNodes) {
-            if (node.nodeName === "IMG") {
-                if (!node.complete) {
-                    startLoading()
-                    node.onerror = stopLoading
-                    node.onload = stopLoading
-                }
-            }
-        }
+class V extends Vue {
+    constructor(...args) {
+        super(...args)
+        this.dispatch = this.$options.store.dispatch
+        this.router = new VueRouter({
+            routes: this.$options.routes,
+            mode: "history"
+        })
     }
-}).observe(document, {
-    subtree: true,
-    attributes: true,
-    childList: true,
-    characterData: true
-})
 
-window.onload = () => store.actions.setLoading(false)
-window["__OBSERVER__"] = observer
+    get reduxState() {
+        return this.$options.store.getState()
+    }
 
-if (module.hot) module.hot.accept()
+    render(h) {
+        return h(App)
+    }
+}
+
+Vue.config.locale = "ru"
+Vue.use(VueI18n)
+Vue.use(VueRouter)
+new Revue(Vue, store)
+new V({ routes, store }).$mount(targetNode)
+
+window.onload = () => {
+    setLoading(true)
+    const cb = () => setLoading(false)
+
+    const hookNodes = R.pipe(
+        R.filter(
+            R.propEq("type", "childList")
+        ),
+        R.map(
+            R.prop("addedNodes")
+        ),
+        R.flatten,
+        R.filter(
+            R.whereEq({
+                nodeName: "IMG",
+                complete: false
+            })
+        ),
+        R.forEach(node => {
+            node.onerror = cb
+            node.onload = cb
+        })
+    )
+
+    new MutationObserver(mutation => {
+        hookNodes(mutation)
+    })
+        .observe(targetNode, {
+            subtree: true,
+            childList: true,
+            attributes: false,
+            characterData: false
+        })
+
+}
+
+if (module.hot) {
+    module.hot.accept()
+}

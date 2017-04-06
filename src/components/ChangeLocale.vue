@@ -26,7 +26,7 @@ export default {
     },
 
     methods: {
-        select(ev) {
+        select() {
             actions.setLocale(this.locale)
         }
     }

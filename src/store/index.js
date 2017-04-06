@@ -1,31 +1,34 @@
-import Vue from "vue"
-import Revue from "revue"
-import {createStore, bindActionCreators, applyMiddleware} from "redux"
-import {composeWithDevTools} from "redux-devtools-extension/developmentOnly"
+import * as Redux from "redux"
+import { composeWithDevTools } from "redux-devtools-extension/developmentOnly"
 import thunk from "redux-thunk"
-import combinedReducers from "./reducers"
-import _actions from "./actions"
+import reducersRegistry from "./reducers"
 
-const persistedState = void(null)
-const middleware = [thunk]
-const reduxStore = createStore(combinedReducers,
-    persistedState, composeWithDevTools(
-        applyMiddleware(...middleware)))
+const configureStore = (initialState) => {
+    const middlewares = [
+        thunk
+    ]
 
-export const actions = bindActionCreators(_actions,
-    reduxStore.dispatch)
+    const enhancer = composeWithDevTools(
+        applyMiddleware(...middlewares)
+    )
 
-export const mix = methods => Object.assign({},
-    actions, methods)
+    const reducer = combineReducers(reducersRegistry)
+    const store = Redux.createStore(
+        reducer,
+        initialState,
+        enhancer
+    )
 
-const store = new Revue(Vue, reduxStore, actions)
-export default store
+    if (module.hot) {
+        module.hot.accept("./reducers", () => {
+            const nextReducer = combineReducers(reducersRegistry)
+            store.replaceReducer(nextReducer)
+        })
+    }
 
-if (process.env.NODE_ENV !== "production") {
-    window["__STORE__"] = store
+    return store
 }
 
-if (module.hot) module.hot.accept("./reducers", () => {
-    const nextCombinedReducers = require("./reducers").default
-    reduxStore.replaceReducer(nextCombinedReducers)
-})
+export default store
+
+
